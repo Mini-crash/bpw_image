@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BPW Test App</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(to bottom, #2b5876, #4e4376);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .container {
+        text-align: center;
+        width: 90%;
+        max-width: 400px;
+    }
+
+    img {
+        max-width: 100px;
+        margin-bottom: 30px;
+    }
+
+    h1 {
+        color: white;
+        margin-bottom: 30px;
+    }
+
+    button {
+        display: block;
+        width: 100%;
+        padding: 20px;
+        margin: 15px 0;
+        font-size: 22px;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        font-weight: bold;
+        background-color: white;
+        color: #333;
+        box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        transition: transform 0.2s, background-color 0.2s;
+    }
+
+    button:hover {
+        transform: scale(1.05);
+        background-color: #f2f2f2;
+    }
+
+    button.end {
+        background-color: #ff4d4d;
+        color: white;
+    }
+
+    button.end:hover {
+        background-color: #cc0000;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- PAGE 1 -->
+    <div id="page1">
+        <img src="https://github.com/Mini-crash/bpw_image/blob/main/bpwrfrfr.png?raw=true" alt="Logo">
+        <h1>Main Menu</h1>
+        <button onclick="showPage2()">Button 1</button>
+        <button onclick="showPage2()">Button 2</button>
+        <button onclick="showPage2()">Button 3</button>
+        <button onclick="showPage2()">Button 4</button>
+    </div>
+
+    <!-- PAGE 2 -->
+    <div id="page2" style="display:none;">
+        <img src="https://via.placeholder.com/100" alt="Logo">
+        <h1>Select Option</h1>
+        <button>1</button>
+        <button>2</button>
+        <button>3</button>
+        <button class="end" onclick="showPage1()">End Task</button>
+    </div>
+
+</div>
+
+<script>
+function showPage2(){
+    document.getElementById("page1").style.display="none";
+    document.getElementById("page2").style.display="block";
+}
+
+function showPage1(){
+    document.getElementById("page2").style.display="none";
+    document.getElementById("page1").style.display="block";
+}
+</script>
+
+</body>
+</html>
