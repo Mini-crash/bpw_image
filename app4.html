@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.2">
+<title>BPW Higher Job Logger</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, #a30a0a, #000000);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+}
+
+img {
+    max-width: 150px;
+    margin-bottom: 30px;
+}
+
+h1 {
+    color: white;
+    margin-bottom: 30px;
+    font-size: 28px;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 25px;
+    margin: 15px 0;
+    font-size: 24px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: white;
+    color: #333;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+button:hover {
+    transform: scale(1.05);
+    background-color: #f2f2f2;
+}
+
+button.end {
+    background-color: #ff4d4d;
+    color: white;
+}
+
+button.end:hover {
+    background-color: #cc0000;
+}
+
+/* Small bottom-right text */
+.powered-by-bottom {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    font-size: 23px;
+    color: white;
+    font-weight: normal;
+    z-index: 1000;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- PAGE 1: Select Person -->
+<div id="page1">
+<img src="https://github.com/Mini-crash/bpw_image/blob/main/bpwrfrfr.png?raw=true" alt="Logo">
+
+<h1>BPW Job Logger 2000</h1>
+
+<button onclick="selectPerson('Sean')">Sean</button>
+<button onclick="selectPerson('Jack')">Jack</button>
+<button onclick="selectPerson('Rex')">Rex</button>
+<button onclick="selectPerson('Darcy')">Darcy</button>
+<button onclick="selectPerson('Chris')">Chris</button>
+<button onclick="selectPerson('Alex')">Alex</button>
+
+</div>
+
+<!-- PAGE 2: Select Action -->
+<div id="page2" style="display:none;">
+
+<img src="https://github.com/Mini-crash/bpw_image/blob/main/bpwrfrfr.png?raw=true" alt="Logo">
+
+<h1>Select Task Type</h1>
+
+<button onclick="selectAction('Start Job')">Start Job</button>
+<button onclick="selectAction('End Job')">End Job</button>
+<button onclick="selectAction('Pause Job')">Pause Job</button>
+<button onclick="selectAction('Resume Job')">Resume Job</button>
+
+<button class="end" onclick="showPage1()">Back</button>
+
+</div>
+
+<!-- PAGE 3: Select Final Task -->
+<div id="page3" style="display:none;">
+
+<img src="https://github.com/Mini-crash/bpw_image/blob/main/bpwrfrfr.png?raw=true" alt="Logo">
+
+<h1>Select Option</h1>
+
+<button onclick="finishTask('QC (next day prep)')">QC (next day prep)</button>
+<button onclick="finishTask('Red --> Green')">Red --> Green</button>
+<button onclick="finishTask('Prep for sale')">Prep for sale</button>
+<button onclick="finishTask('Secondary task')">Secondary task</button>
+
+<button class="end" onclick="showPage2()">Back</button>
+
+</div>
+
+</div>
+
+<!-- Small bottom-right text -->
+<div class="powered-by-bottom">Powered by Otis</div>
+
+<script>
+
+// Store selections
+let selectedPerson = "";
+let selectedAction = "";
+let selectedTask = "";
+
+// Page navigation
+function showPage1(){
+    document.getElementById("page1").style.display="block";
+    document.getElementById("page2").style.display="none";
+    document.getElementById("page3").style.display="none";
+}
+
+function showPage2(){
+    document.getElementById("page1").style.display="none";
+    document.getElementById("page2").style.display="block";
+    document.getElementById("page3").style.display="none";
+}
+
+function showPage3(){
+    document.getElementById("page1").style.display="none";
+    document.getElementById("page2").style.display="none";
+    document.getElementById("page3").style.display="block";
+}
+
+// Select person
+function selectPerson(name){
+    selectedPerson = name;
+    console.log("Person selected:", selectedPerson);
+    showPage2();
+}
+
+// Select action
+function selectAction(action){
+    selectedAction = action;
+    console.log("Action selected:", selectedAction);
+    showPage3();
+}
+
+// Finish task and log timestamp
+function finishTask(task){
+    selectedTask = task;
+
+    const logEntry = {
+        person: selectedPerson,
+        action: selectedAction,
+        task: selectedTask,
+        time: new Date().toISOString()
+    };
+
+    console.log("JOB LOGGED:", logEntry);
+
+    // TODO: Send logEntry to SharePoint or database
+
+    showPage1(); // return to main menu
+}
+
+</script>
+
+</body>
+</html>
